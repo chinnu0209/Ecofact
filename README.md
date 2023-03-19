@@ -30,10 +30,17 @@ In step 2, install the Git and Docker. Before the step 2 make sure update all th
 ```jsx
 sudo apt-get update && sudo apt-get upgrade
 ```
-The next command will try to install Git:
+The next command will try to install Git :
 ```jsx
 sudo apt-get install git
 ```
+Verify that Git has been installed by running :
+```jsx
+sudo git --version
+```
+
+
+
 
 
 
