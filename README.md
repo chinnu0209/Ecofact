@@ -25,10 +25,9 @@ In order that we need a private runner that executes our workloads.
 Install a GitLab Runner on Your Raspberry Pi 4 B model by following the instructions provided by GitLab. This will involve downloading and installing the GitLab Runner binary.
 In step 1, connect the PI with the SSH. 
 In step 2, install the Git and Docker. Before the step 2 make sure update all the existing dependenies on the Operating System. 
-    # Bash  
-    ```bash
-    sudo apt-get update && sudo apt-get upgrade
-    ``` 
+```jsx
+sudo apt-get update && sudo apt-get upgrade
+```
 
 
 ## Argo CD Installation
