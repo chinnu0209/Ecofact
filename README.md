@@ -30,7 +30,7 @@ In step 2, install the Git and Docker. Before the step 2 make sure update all th
 ```jsx
 sudo apt-get update && sudo apt-get upgrade
 ```
-The next command will try to install Git :
+The next command will try to install Git [^1] :
 ```jsx
 sudo apt-get install git
 ```
@@ -38,8 +38,14 @@ Verify that Git has been installed by running :
 ```jsx
 sudo git --version
 ```
-
-
+Installing Docker require a few steps, but the best way to start is to download and execute a helper installation script directly from Docker [^2] :
+```jsx
+curl -sSL https://get.docker.com | sh
+```
+The next step is to add the pi user to the docker group (which should have been created already):
+```jsx
+sudo usermod -aG docker pi
+```
 
 
 
@@ -47,3 +53,7 @@ sudo git --version
 ## Argo CD Installation
 
 ## Configure Dashboard
+
+# References
+1. [https://git-scm.com/download/linux](https://git-scm.com/download/linux).
+2. [https://docs.docker.com/engine/install/ubuntu/](https://docs.docker.com/engine/install/ubuntu/)
