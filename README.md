@@ -42,11 +42,26 @@ Installing Docker require a few steps, but the best way to start is to download 
 ```jsx
 curl -sSL https://get.docker.com | sh
 ```
-The next step is to add the pi user to the docker group (which should have been created already):
+The next step is to add the pi user to the docker group (which should have been created already) :
 ```jsx
 sudo usermod -aG docker pi
 ```
-
+You can check if this has been done by using the command and by verifying that docker is in the list :
+```jsx
+groups pi
+```
+Verify whether Docker deamon is started or not :
+```jsx
+sudo systemctl status docker
+```
+If not enable manually using :
+```jsx
+sudo systemctl enable docker
+```
+Now restart your Raspbery Pi :
+```jsx
+sudo reboot
+```
 
 
 
