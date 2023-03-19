@@ -55,5 +55,5 @@ sudo usermod -aG docker pi
 ## Configure Dashboard
 
 # References
-1. [https://git-scm.com/download/linux](https://git-scm.com/download/linux).
-2. [https://docs.docker.com/engine/install/ubuntu/](https://docs.docker.com/engine/install/ubuntu/)
+[^1]: [https://git-scm.com/download/linux](https://git-scm.com/download/linux).
+[^2]: [https://docs.docker.com/engine/install/ubuntu/](https://docs.docker.com/engine/install/ubuntu/)
