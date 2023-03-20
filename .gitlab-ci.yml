@@ -1,0 +1,56 @@
+
+stages:
+    - build
+
+before_script:
+  - echo $CI_REGISTRY_IMAGE:$TAG $PWD
+
+build-plc-docker-image:
+    stage: build
+    image: 
+        name: gcr.io/kaniko-project/executor:debug
+        entrypoint: [""]
+    only:
+        - tags
+    tags:
+        - eco
+
+    script:
+        -  echo "Building and shipping image to $CI_REGISTRY_IMAGE"
+        -  mkdir -p /kaniko/.docker 
+        -   echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > /kaniko/.docker/config.json
+        -  /kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/plc/Dockerfile --destination $CI_REGISTRY_IMAGE/plc:$CI_COMMIT_TAG
+        
+       
+
+build-device-docker-image:
+    stage: build
+    image: 
+        name: gcr.io/kaniko-project/executor:debug
+        entrypoint: [""]
+    only:
+        - tags
+    tags:
+        - eco
+    script:
+        - echo "Building and shipping Operator image to $CI_REGISTRY_IMAGE"
+        - mkdir -p /kaniko/.docker 
+        -  echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > /kaniko/.docker/config.json
+        - /kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/device/Dockerfile --destination $CI_REGISTRY_IMAGE/device:$CI_COMMIT_TAG
+
+
+
+build-api-docker-image:
+    stage: build
+    image: 
+        name: gcr.io/kaniko-project/executor:debug
+        entrypoint: [""]
+    only:
+        - tags
+    tags:
+        - eco
+    script:
+        - echo "Building and shipping Operator image to $CI_REGISTRY_IMAGE"
+        - mkdir -p /kaniko/.docker 
+        -  echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > /kaniko/.docker/config.json
+        - /kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/api/Dockerfile --destination $CI_REGISTRY_IMAGE/api:$CI_COMMIT_TAG
