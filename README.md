@@ -4,7 +4,7 @@ Table of Contents
 =================
 * [K3s Installation](#k3s-installation)
 * [Configure Gitlab Runner](#configure-gitlab-runner)
-   * [Basic Raspberry Pi setup](#basic-raspberry-pi-setup)
+   * [Raspberry Pi setup](#raspberry-pi-setup)
 * [Argo CD Installation](#argo-cd-installation)
 * [Configure Dashboard](#configure-dashboard)
 
@@ -21,7 +21,7 @@ Install a GitLab Runner on Raspberry Pi 4b to run GitLab CI jobs.
 By default, Gitlab offers public runners to execute our workloads but often its not secure to run our workloads on the public runners. 
 In order that we need a private runner that executes our workloads.
 
-# Basic Raspberry Pi setup
+# Raspberry Pi setup
 Install a GitLab Runner on Your Raspberry Pi 4 B model by following the instructions provided by GitLab. This will involve downloading and installing the GitLab Runner binary.
 
 In step 1, connect the PI with the SSH.
