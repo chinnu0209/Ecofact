@@ -186,9 +186,28 @@ In the end check the runner status using :
 sudo gitlab-runner status
 ```
 
-
-
 ## Argo CD Installation
+
+Installing ArgoCD on k3s cluster and deploying a Ecofact application.
+
+Before installation create the namespace on the cluster for isolation of workloads in the cluster using :
+```jsx
+kubectl create namespace argocd
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ## Configure Dashboard
 
