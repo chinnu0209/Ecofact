@@ -98,4 +98,4 @@ sudo gitlab-runner register
 # References
 [^1]: [https://git-scm.com/download/linux](https://git-scm.com/download/linux).
 [^2]: [https://docs.docker.com/engine/install/ubuntu/](https://docs.docker.com/engine/install/ubuntu/)
-[^3]: [https://docs.gitlab.com/runner/install/linux-manually.html](#https://docs.gitlab.com/runner/install/linux-manually.html)
+[^3]: [https://docs.gitlab.com/runner/install/linux-manually.html](https://docs.gitlab.com/runner/install/linux-manually.html)
