@@ -64,6 +64,8 @@ sudo reboot
 ```
 # Gitlab runner installation
 
+1. Install the package for your system as follows.
+
 Here we need to install the runner on the ARM-based SOC-type to run jobs on Rasperry PI 4 B model.
 we have to follow the official documentation for Linux [^3]. Before choosing the which package to download, we need to find which type of CPU architecture our system contains using :
 ```jsx
@@ -80,14 +82,31 @@ Once the download is over, it is time to ask the package manager to install the 
 ```jsx
 sudo dpkg -i gitlab-runner_armhf.deb
 ```
+2. Refister a runner under Linux
+
 configure the GitLab CI Runner, in order to pick the jobs that stated in this [file](https://github.com/chinnu0209/K3s-installation-guide-on-Ubuntu-22.04/blob/main/.gitlab-ci.yml).
 For this we need to go to 'settings > CI/CD' and expand the runners configuration. From there we can see the page with runners and below that we need disable any shared runners that currently using for this project.
+
+This will start a short configuration with the following steps: 
 
 Let’s go back to our Raspberry Pi and start the configuration by running this command :
 ```jsx
 sudo gitlab-runner register
 ```
+Enter the GitLab instance URL (for example, : https://gitlab.cc-asp.fraunhofer.de/skt/ecofact.git).
 
+Enter the registration token — Copy/paste the registration token exactly as shown in GitLab UI page.
+
+Enter a description for the runner — Simply mention your project name and hit enter.
+
+Enter tags for the runner (comma-separated)— You can leave this empty or define a tag, like ' eco '. You can change this later from GitLab.
+
+Enter an executor : custom, docker, ssh, virtualbox, docker-ssh+machine, kubernetes, docker-ssh, parallels, shell, docker+machine — this may depend based on your needs. we have used the docker executor to execute our jobs in a docker container.
+
+In the end check the runner status using :
+```jsx
+sudo gitlab-runner status
+```
 
 
 
