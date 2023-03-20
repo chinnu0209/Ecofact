@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+    Kind: Application 
+    metadata:
+       name: Ecofact
+       namespace: raspi
+    spec:
+        destination: 
+            namespace: raspi
+            server: https://kubernetes.default.svc
+        project: Ecofact
+        source:
+            path: manifests
+            repoURL: https://gitlab.cc-asp.fraunhofer.de
+            /skt/ecofact.git
+            targetRevision: HEAD
+        syncPolicy:
+            syncOptions:
+            - CreateNamespace=true
+            automated:
+              selfHeal: true
+              prune: true
