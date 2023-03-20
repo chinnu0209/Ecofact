@@ -34,7 +34,7 @@ step 2 : Map the hostnames on each node
 
 Make sure you have the hostnames mapped on each node. This is by adding the IP and hostname of each node in the /etc/hosts file of each host.
 
-In our setup, it is as follows:
+In our setup, it is as follows :
 ```jsx
 sudo vim /etc/hosts
 10.34.159.244  K3s-master
@@ -69,17 +69,17 @@ sudo ufw allow 443/tcp
 ```
 You need to extract a token form the master that will be used to join the nodes to the master.
 
-On the master node:
+On the master node :
 ```jsx
 sudo cat /var/lib/rancher/k3s/server/node-token
 ```
 Step 5 : Install k3s on worker nodes and connect them to the master
 
-The next step is to install k3s on the worker nodes. Run the commands below to install k3s on worker nodes:
+The next step is to install k3s on the worker nodes. Run the commands below to install k3s on worker nodes :
 ```jsx
 curl -sfL http://get.k3s.io | K3S_URL=https://<master_IP>:6443 K3S_TOKEN=<join_token> sh -s - --docker
 ```
-You can verify if the k3s-agent on the worker nodes is running by:
+You can verify if the k3s-agent on the worker nodes is running by :
 ```jsx
 sudo systemctl status k3s-agent
 ```
