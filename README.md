@@ -9,8 +9,86 @@ Table of Contents
 * [Configure Dashboard](#configure-dashboard)
 
 ## K3s Installation
-In the 
+In this implementation we used a way of provisioning kubernetes cluster using a k3s cluster from rancher [^1] . Its a light-weight kubernetes distribution, ideally used for edge based device/architectures. It uses less amount of resources from the system architecture to spin our workloads.
 
+For this demo, we are going to be creating 3 node cluster that one master and two worker nodes.
+Kubernetes architecture involues a master and worker nodes. Their functions are as follows :
+
+* Master — Controls the cluster, API calls, e.t.c.
+
+* Worker — These handles the workloads, where the pods are deployed and applications ran. They can be added and removed from the cluster.
+
+Here master node is AMD-64 based SOC-type, worker 1 is AMD-64 and worker 2 is ARM-64. 
+
+For the each node the minimum requirement to start the environment is 1 CPU and 1 GB RAM.
+
+Before installing k3s on virtiual machines, first we need to connect the nodes using SSH. 
+
+We need to login as a sudo user i.e root user.
+
+step 1 : Update all the existing dependencies on the host machines using :
+```jsx
+sudo apt-get update && sudo apt-get upgrade
+```
+step 2 : Map the hostnames on each node
+
+Make sure you have the hostnames mapped on each node. This is by adding the IP and hostname of each node in the /etc/hosts file of each host.
+
+In our setup, it is as follows:
+```jsx
+sudo vim /etc/hosts
+10.34.159.244  K3s-master
+10.34.159.141  worker01
+10.100.220.61  Ipt-p-oo21 (worker02)
+```
+This has to be done on all the hosts for you to use DNS names.
+
+step 3 : setup the master k3s node
+
+In this step, we shall install and prepare the master node. This involves installing the k3s service and starting it.
+```jsx
+curl -sfL https://get.k3s.io | sh -s - --docker
+```
+Run the command above to install k3s on the master node. The script installs k3s and starts it automatically.
+
+To check if the service installed successfully, you can use:
+```jsx
+sudo systemctl status k3s
+```
+You can check if the master node is working by :
+```jsx
+sudo kubectl get nodes -o wide
+```
+
+step 4 : Allow ports on firewall
+
+We need to allow ports that will will be used to communicate between the master and the worker nodes. The ports are 443 and 6443.
+```jsx
+sudo ufw allow 6443/tcp
+sudo ufw allow 443/tcp
+```
+You need to extract a token form the master that will be used to join the nodes to the master.
+
+On the master node:
+```jsx
+sudo cat /var/lib/rancher/k3s/server/node-token
+```
+Step 5 : Install k3s on worker nodes and connect them to the master
+
+The next step is to install k3s on the worker nodes. Run the commands below to install k3s on worker nodes:
+```jsx
+curl -sfL http://get.k3s.io | K3S_URL=https://<master_IP>:6443 K3S_TOKEN=<join_token> sh -s - --docker
+```
+You can verify if the k3s-agent on the worker nodes is running by:
+```jsx
+sudo systemctl status k3s-agent
+```
+To verify that our nodes have successfully been added to the cluster, run :
+```jsx
+sudo kubectl get nodes
+```
+
+This shows that we have successfully setup our k3s cluster ready to deploy applications to it.
 
 
 ## Configure Gitlab Runner
@@ -30,7 +108,7 @@ In step 2, install the Git and Docker. Before the step 2 make sure update all th
 ```jsx
 sudo apt-get update && sudo apt-get upgrade
 ```
-The next command will try to install Git [^1] :
+The next command will try to install Git [^2] :
 ```jsx
 sudo apt-get install git
 ```
@@ -38,7 +116,7 @@ Verify that Git has been installed by running :
 ```jsx
 sudo git --version
 ```
-Installing Docker require a few steps, but the best way to start is to download and execute a helper installation script directly from Docker [^2] :
+Installing Docker require a few steps, but the best way to start is to download and execute a helper installation script directly from Docker [^3] :
 ```jsx
 curl -sSL https://get.docker.com | sh
 ```
@@ -67,11 +145,11 @@ sudo reboot
 1. Install the package for your system as follows.
 
 Here we need to install the runner on the ARM-based SOC-type to run jobs on Rasperry PI 4 B model.
-we have to follow the official documentation for Linux [^3]. Before choosing the which package to download, we need to find which type of CPU architecture our system contains using :
+we have to follow the official documentation for Linux [^4]. Before choosing the which package to download, we need to find which type of CPU architecture our system contains using :
 ```jsx
 dpkg --print-architecture
 ```
-In our we need 'armhf' package. From [^3] download the package on Linux distribution. 
+In our we need 'armhf' package. From [^4] download the package on Linux distribution. 
 For Debian/Ubuntu/Mint :
 ```jsx
 # Replace ${arch} with any of the supported architectures, e.g. amd64, arm, arm64
@@ -115,6 +193,8 @@ sudo gitlab-runner status
 ## Configure Dashboard
 
 # References
-[^1]: [https://git-scm.com/download/linux](https://git-scm.com/download/linux).
-[^2]: [https://docs.docker.com/engine/install/ubuntu/](https://docs.docker.com/engine/install/ubuntu/)
-[^3]: [https://docs.gitlab.com/runner/install/linux-manually.html](https://docs.gitlab.com/runner/install/linux-manually.html)
+
+[^1]: [https://docs.k3s.io/installation/configuration](https://docs.k3s.io/installation/configuration)
+[^2]: [https://git-scm.com/download/linux](https://git-scm.com/download/linux).
+[^3]: [https://docs.docker.com/engine/install/ubuntu/](https://docs.docker.com/engine/install/ubuntu/)
+[^4]: [https://docs.gitlab.com/runner/install/linux-manually.html](https://docs.gitlab.com/runner/install/linux-manually.html)
