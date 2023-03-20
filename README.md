@@ -62,6 +62,32 @@ Now restart your Raspbery Pi :
 ```jsx
 sudo reboot
 ```
+# Gitlab runner installation
+
+Here we need to install the runner on the ARM-based SOC-type to run jobs on Rasperry PI 4 B model.
+we have to follow the official documentation for Linux [^3]. Before choosing the which package to download, we need to find which type of CPU architecture our system contains using :
+```jsx
+dpkg --print-architecture
+```
+In our we need 'armhf' package. From [^3] download the package on Linux distribution. 
+For Debian/Ubuntu/Mint :
+```jsx
+# Replace ${arch} with any of the supported architectures, e.g. amd64, arm, arm64
+# A full list of architectures can be found here https://gitlab-runner-downloads.s3.amazonaws.com/latest/index.html
+curl -LJO "https://gitlab-runner-downloads.s3.amazonaws.com/latest/deb/gitlab-runner_${arch}.deb"
+```
+Once the download is over, it is time to ask the package manager to install the GitLab Runner.
+```jsx
+sudo dpkg -i gitlab-runner_armhf.deb
+```
+configure the GitLab CI Runner, in order to pick the jobs that stated in .gitlab-ci.yml file.
+For this we need to go to 'settings > CI/CD' and expand the runners configuration. From there we can see the page with runners and below that we need disable any shared runners that currently using for this project.
+
+Let’s go back to our Raspberry Pi and start the configuration by running this command :
+```jsx
+sudo gitlab-runner register
+```
+
 
 
 
@@ -72,3 +98,4 @@ sudo reboot
 # References
 [^1]: [https://git-scm.com/download/linux](https://git-scm.com/download/linux).
 [^2]: [https://docs.docker.com/engine/install/ubuntu/](https://docs.docker.com/engine/install/ubuntu/)
+[^3]: [https://docs.gitlab.com/runner/install/linux-manually.html](#https://docs.gitlab.com/runner/install/linux-manually.html)
