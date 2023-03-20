@@ -80,7 +80,7 @@ Once the download is over, it is time to ask the package manager to install the 
 ```jsx
 sudo dpkg -i gitlab-runner_armhf.deb
 ```
-configure the GitLab CI Runner, in order to pick the jobs that stated in .gitlab-ci.yml file.
+configure the GitLab CI Runner, in order to pick the jobs that stated in this [file](https://github.com/chinnu0209/K3s-installation-guide-on-Ubuntu-22.04/blob/main/.gitlab-ci.yml).
 For this we need to go to 'settings > CI/CD' and expand the runners configuration. From there we can see the page with runners and below that we need disable any shared runners that currently using for this project.
 
 Let’s go back to our Raspberry Pi and start the configuration by running this command :
