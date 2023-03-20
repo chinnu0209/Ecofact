@@ -1,0 +1,117 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: api
+  name: api-deployment
+  namespace: raspi
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: api
+  template:
+    metadata:
+      labels:
+        app: api
+    spec:
+      containers:
+      - image: registry.gitlab.cc-asp.fraunhofer.de/skt/ecofact/api:v0.9
+        name: api
+        command: ["/bin/sh", "-ce", "tail -f /dev/null"]
+        imagePullPolicy: Always
+        ports:
+            - containerPort: 8080
+      imagePullSecrets:
+      - name: private
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: device
+  name: device-deployment
+  namespace: raspi
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: device
+  template:
+    metadata:
+      labels:
+        app: device
+    spec:
+      containers:
+      - image: registry.gitlab.cc-asp.fraunhofer.de/skt/ecofact/device:v0.9
+        name: device
+        command: ["/bin/sh", "-ce", "tail -f /dev/null"]
+        imagePullPolicy: Always
+        ports:
+            - containerPort: 1883
+      imagePullSecrets:
+      - name: private
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: plc
+  name: plc-deployment
+  namespace: raspi
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: plc
+  template:
+    metadata:
+      labels:
+        app: plc
+    spec:
+      containers:
+      - image: registry.gitlab.cc-asp.fraunhofer.de/skt/ecofact/plc:v0.9
+        name: plc
+        command: ["/bin/sh", "-ce", "tail -f /dev/null"]
+        imagePullPolicy: Always
+        ports:
+            - containerPort: 502
+      imagePullSecrets:
+      - name: private
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: mqtt
+  name: mqtt-deployment
+  namespace: raspi
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mqtt
+  template:
+    metadata:
+      labels:
+        app: mqtt
+    spec:
+      containers:
+      - image: eclipse-mosquitto
+        name: mqtt
+        imagePullPolicy: Always
+        resources:
+          requests:
+            memory: "100Mi"
+          limits:
+            memory: "200Mi"
+        ports:
+            - containerPort: 1883
+      imagePullSecrets:
+      - name: private
