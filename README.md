@@ -202,10 +202,7 @@ Once the installation completes successfully, you can use the watch command to c
 ```jsx
 watch kubectl get pods -n argocd
 ```
-By default, there should be pods that eventually receive the Running status as part of a stock Argo CD installation as shown below :
-<p align="center">
-   <img width="300" height="280" src="">
-</p>
+By default, there should be pods that eventually receive the Running status as part of a stock Argo CD installation as shown in this [file](https://github.com/chinnu0209/K3s-installation-guide-on-Ubuntu-22.04/blob/main/Argopo.PNG).
 
 
 
