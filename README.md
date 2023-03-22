@@ -194,6 +194,18 @@ Before installation create the namespace on the cluster for isolation of workloa
 ```jsx
 kubectl create namespace argocd
 ```
+After that, you can run the Argo CD install script provided by the project maintainers [^5] :
+```jsx
+kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+```
+Once the installation completes successfully, you can use the watch command to check the status of your Kubernetes pods:
+```jsx
+watch kubectl get pods -n argocd
+```
+By default, there should be pods that eventually receive the Running status as part of a stock Argo CD installation as shown below :
+<p align="center">
+   <img width="300" height="280" src="">
+</p>
 
 
 
