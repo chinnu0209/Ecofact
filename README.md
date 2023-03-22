@@ -263,7 +263,7 @@ kubectl get pods -n raspi
 
 Enabling the Dashboard and Logging In
 
-step 1 — Deploying the Kubernetes Dashboard as a pod in the K3s cluster
+step 1 — Deploying the Kubernetes Dashboard as a pod in the K3s cluster.
 
 The Dashboard UI is not deployed by default. To deploy it, run the following command :
 ```jsx
@@ -281,7 +281,9 @@ After entering into UI, we need to provide a access token using :
 ```jsx
 kubectl -n kubernetes-dashboard create token admin-user
 ```
+Copy the token from the console and paste it into the ' Enter token ' field on the Kubernetes Dashboard login screen. Click Sign in to log into the dashboard as administrator.
 
+After you can see nice visuaizations of the cluster as shown [file](https://github.com/chinnu0209/Ecofact/blob/main/Dashboard.png) and [file](https://github.com/chinnu0209/Ecofact/blob/main/Dashboard1.png).
 # References
 
 [^1]: [https://docs.k3s.io/installation/configuration](https://docs.k3s.io/installation/configuration)
