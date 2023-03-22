@@ -259,8 +259,28 @@ In the end you view our application running as a pods inside the cluster using [
 kubectl get pods -n raspi
 ```
 
+## Configure Dashboard [^6]
 
-## Configure Dashboard
+Enabling the Dashboard and Logging In
+
+step 1 — Deploying the Kubernetes Dashboard as a pod in the K3s cluster
+
+The Dashboard UI is not deployed by default. To deploy it, run the following command :
+```jsx
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/recommended.yaml
+```
+step 2 — Acessing the UI 
+
+By default, dashboard deploys with a minimal Role-Based-Acess-Control. But we can also create RBAC [file](https://github.com/chinnu0209/Ecofact/blob/main/dashboard.yml) for the particular cluster based on the users, roles ..etc.
+
+With help of ' Kubectl proxy ' we can enable the dashboard from the command line. Dashboard will be available at :
+```jsx
+ http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/.
+```
+After entering into UI, we need to provide a access token using : 
+```jsx
+kubectl -n kubernetes-dashboard create token admin-user
+```
 
 # References
 
@@ -269,3 +289,4 @@ kubectl get pods -n raspi
 [^3]: [https://docs.docker.com/engine/install/ubuntu/](https://docs.docker.com/engine/install/ubuntu/)
 [^4]: [https://docs.gitlab.com/runner/install/linux-manually.html](https://docs.gitlab.com/runner/install/linux-manually.html)
 [^5]: [https://argo-cd.readthedocs.io/en/stable/getting_started/](https://argo-cd.readthedocs.io/en/stable/getting_started/)
+[^6]: [https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/](https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/)
