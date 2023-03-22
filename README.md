@@ -186,11 +186,11 @@ In the end check the runner status using :
 sudo gitlab-runner status
 ```
 
-## Argo CD Installation
+## Argo CD Installation [^5] 
 
 Step 1 — Installing Argo CD on Your Cluster
 
-Installing ArgoCD on k3s cluster and deploying a Ecofact application.
+Installing ArgoCD on k3s cluster and deploying an Ecofact application.
 
 Before installation create the namespace on the cluster for isolation of workloads in the cluster using :
 ```jsx
@@ -252,9 +252,9 @@ argocd app create Ecofact --repo https://gitlab.cc-asp.fraunhofer.de/skt/ecofact
 ```
 You have now successfully deployed an application using Argo CD! It is possible to accomplish the same thing from the Argo CD web interface, but it is usually quicker and more reproducible to deploy via the command line. However, it is very helpful to check on your Argo CD web dashboard after deployment in order to verify that your applications are running properly. You can see that by opening localhost:8080 in a browser.
 
-The ecofact application is now running and you can now view its resource components, logs, events, and assessed health status as shown in .
+The ecofact application is now running and you can now view its resource components, logs, events, and assessed health status as shown in [file](https://github.com/chinnu0209/K3s-installation-guide-on-Ubuntu-22.04/blob/main/argo.PNG).
 
-In the end you view our application running as a pods inside the cluster using :
+In the end you view our application running as a pods inside the cluster using [file](https://github.com/chinnu0209/K3s-installation-guide-on-Ubuntu-22.04/blob/main/podr.PNG) :
 ```jsx
 kubectl get pods -n raspi
 ```
@@ -268,3 +268,4 @@ kubectl get pods -n raspi
 [^2]: [https://git-scm.com/download/linux](https://git-scm.com/download/linux).
 [^3]: [https://docs.docker.com/engine/install/ubuntu/](https://docs.docker.com/engine/install/ubuntu/)
 [^4]: [https://docs.gitlab.com/runner/install/linux-manually.html](https://docs.gitlab.com/runner/install/linux-manually.html)
+[^5]: [https://argo-cd.readthedocs.io/en/stable/getting_started/](https://argo-cd.readthedocs.io/en/stable/getting_started/)
