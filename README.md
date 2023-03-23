@@ -246,7 +246,7 @@ docker ps
 ```
 In the end we need to store our end images in our own repository. There are several options to store our artifacts and one of the option is docker hub and where we can push and pull our images using :
 
-Before that we need to create an account in the docker hub and create a repository and login from CLI or web UI and push images from local environment to remote location.
+Before that we need to create an account in the docker hub and create a repository and login from CLI or web UI and push images from local environment to remote location [file](https://github.com/chinnu0209/Ecofact/blob/main/Fraunhofer.png).
 
 ```jsx
 docker push ecofact
