@@ -94,7 +94,7 @@ This shows that we have successfully setup our k3s cluster ready to deploy appli
 
 
 ## Configure Gitlab Runner
-In order to execute the jobs under we stated in .gitlab-ci.yml file where we need to configure runner with tag. When ever developer updates the code and push to repository where the runner picks those jobs and execute and push the build to registry.
+In order to execute the jobs under we stated in .gitlab-ci.yml [file](https://github.com/chinnu0209/Ecofact/blob/main/.gitlab-ci.yml) where we need to configure runner with tag [file](https://github.com/chinnu0209/Ecofact/blob/main/Pipeline.png). When ever developer updates the code and push to repository where the runner picks those [jobs](https://github.com/chinnu0209/Ecofact/blob/main/Pipeline2.png) and execute and push the build to registry [file](https://github.com/chinnu0209/Ecofact/blob/main/Fraunhofer.png).
 
 Install a GitLab Runner on Raspberry Pi 4b to run GitLab CI jobs.
 
