@@ -194,12 +194,63 @@ Before packaging the code, we need to install docker on the operatiing system. A
 
 After the installation, now we need to build our own image for our project.
 
-Workflow of the docker image as shown below :
+Before building an image we need a source code i.e our application code contains libraries and dependencies (ideally everything to run).
+The full life-cycle of docker from building image from Dockerfile to shipping containers out of it and deploying or packaging in the form of artifacts or stored in a container registry. From there we need to pull those end artifacts and deployed to our targeted environments i.e K3s cluster.
+
+Workflow of the docker image as shown below [^7]:
 
 <p align="center">
     <img width="300" height="280" src="docker-build-workflow.png">
   </p>
 
+step 1 : creating Dockerfile
+Note: Here we, need to give the name as ' Dockerfile ' not as ' dockerfile' or anything else.
+For example
+```jsx
+FROM node:18-alpine
+WORKDIR /app
+COPY . .
+RUN yarn install --production
+CMD ["node", "src/index.js"]
+EXPOSE 3000
+```
+
+step 2 : Building Docker Image
+In the above we need to choose based on which your application code your working with, in our example its based on node.js.
+After saving the above file under your application code. 
+Now we need to generate a image out of it using :
+```jsx
+docker build -t ecofact .
+```
+Here -t is the tag for your image and ecofact is the name and in the end, we need to provide (.) in order docker should know from where should take that and build image out of it. 
+
+You can list the images using :
+```jsx
+docker images
+```
+step 3 : Test the Docker Image and run as a container
+
+Now after building the image we will run the Docker image using :
+```jsx
+docker run -d -p 3000:3000 ecofact
+```
+Now we run our image as container in detached mode (-d), port the container to host from 3000:3000 [hostport:containerport]. Open the local browser and type the below command :
+```jsx
+ http://localhost:3000.
+```
+In the local environment you can see your web app.
+
+you can list the containers using :
+```jsx
+docker ps
+```
+In the end we need to store our end images in our own repository. There are several options to store our artifacts and one of the option is docker hub and where we can push and pull our images using :
+
+Before that we need to create an account in the docker hub and create a repository and login from CLI or web UI and push images from local environment to remote location.
+
+```jsx
+docker push ecofact
+```
 
 
 ## Argo CD Installation [^5] 
@@ -308,3 +359,4 @@ After you can see nice visuaizations of the cluster as shown [file](https://gith
 [^4]: [https://docs.gitlab.com/runner/install/linux-manually.html](https://docs.gitlab.com/runner/install/linux-manually.html)
 [^5]: [https://argo-cd.readthedocs.io/en/stable/getting_started/](https://argo-cd.readthedocs.io/en/stable/getting_started/)
 [^6]: [https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/](https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/)
+[^7]: [https://devopscube.com/build-docker-image/](https://devopscube.com/build-docker-image/)
