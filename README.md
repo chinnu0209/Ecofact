@@ -194,7 +194,11 @@ Before packaging the code, we need to install docker on the operatiing system. A
 
 After the installation, now we need to build our own image for our project.
 
+Workflow of the docker image as shown below :
 
+<p align="center">
+    <img width="300" height="280" src="docker-build-workflow.png">
+  </p>
 
 
 
