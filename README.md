@@ -188,6 +188,12 @@ In the end check the runner status using :
 sudo gitlab-runner status
 ```
 # Application Package
+In this demo, we used Docker for packaging the application code and it is a powerful tool that allows developers to package their applications and dependencies into containers. This makes it easy to deploy and run the application on any machine that has Docker installed, regardless of the underlying operating system or hardware.
+
+Before packaging the code, we need to install docker on the operatiing system. A step by step guide is illustrated here [file](https://github.com/chinnu0209/Ecofact#raspberry-pi-setup).
+
+After the installation, now we need to build our own image for our project.
+
 
 
 
