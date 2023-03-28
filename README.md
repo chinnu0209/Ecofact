@@ -352,7 +352,6 @@ Copy the token from the console and paste it into the ' Enter token ' field on t
 
 After you can see nice visuaizations of the cluster as shown [file](https://github.com/chinnu0209/Ecofact/blob/main/Dashboard.png) and [file](https://github.com/chinnu0209/Ecofact/blob/main/Dashboard1.png).
 
-Note: 
 # References
 
 [^1]: [https://docs.k3s.io/installation/configuration](https://docs.k3s.io/installation/configuration)
